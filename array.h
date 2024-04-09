@@ -149,6 +149,7 @@ void swap_array(array * a,int i,int j){
     memcpy(&a->data_list[i],&a->data_list[j],sizeof(element_type));
     memcpy(&a->data_list[j],&temp,sizeof(element_type));
 }
+#ifndef KKK
 // 重新分配空间
 status reserve(array * a,int size_){
     if (size_ > a->size){
@@ -177,6 +178,7 @@ status reserve_(array * a){
     }
     return false;
 }
+#endif
 // 新增
 status insert_array(array * a,element_type e,int i){
     if (a->data_list == 0 || a->size == 0){
@@ -325,7 +327,9 @@ status delete_array_all(array * a,int start,int end){
         memcpy(&a->data_list[i],&a->data_list[j],sizeof(element_type));
     }
     a->length -= (end - start);
+#ifndef KKK
     reserve_(a);
+#endif
     return true;
 }
 //清空
@@ -341,6 +345,7 @@ size_t array_length(array a){
     }
     return a.length;
 }
+#ifndef KKK
 // 重新分配空间
 void resize_array(array * a,int size_){
     if (size_ > a->size){
@@ -349,6 +354,7 @@ void resize_array(array * a,int size_){
         reserve_(a);
     }
 }
+#endif
 // 返回首部
 element_type * fount(array * a){
     return &a->data_list[0];
